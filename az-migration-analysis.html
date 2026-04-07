@@ -679,6 +679,13 @@
       <div class="meth-step-body">For each section, computed the % of pages carrying each block. Sections with distinct block signatures became separate templates. Sections sharing the same signature were merged (e.g. press &amp; medical releases, Thailand PRs).</div>
       <div class="meth-step-stat">18 distinct templates identified</div>
     </div>
+    <div class="meth-step">
+      <div class="meth-step-num">6</div>
+      <div class="meth-step-icon">🔬</div>
+      <div class="meth-step-title">Page-import validation</div>
+      <div class="meth-step-body">One representative page per template scraped with Playwright, structure identified (sections + content sequences), authoring decisions made (default content vs EDS block), and import HTML generated. Validated block inventory from both directions: CSS class analysis across 943 pages + full DOM inspection of 18 representative pages.</div>
+      <div class="meth-step-stat">18 pages imported · 1 new block confirmed (country-list) · 5 import HTMLs generated</div>
+    </div>
   </div>
 
   <!-- Confidence table -->
@@ -739,7 +746,7 @@
     <div class="caveat-card">
       <div class="caveat-icon">📐</div>
       <div class="caveat-title">Block ≠ authoring complexity</div>
-      <div class="caveat-body">32 blocks is a component count, not a story-point count. A block appearing on 85% of pages (<code>rich-text</code>) may be trivial to build, while <code>data-table</code> appearing on 2% of pages may require a complex EDS spreadsheet integration. Effort sizing adjusts for this.</div>
+      <div class="caveat-body">33 blocks is a component count, not a story-point count. A block appearing on 85% of pages (<code>rich-text</code>) may be trivial to build, while <code>data-table</code> appearing on 2% of pages may require a complex EDS spreadsheet integration. Effort sizing adjusts for this.</div>
     </div>
   </div>
 
@@ -753,7 +760,7 @@
     <div class="scope-text">
       Source: <strong>astrazeneca.com</strong> · Sitemap crawled <strong>7 Apr 2026</strong> ·
       <strong>2,455 URLs</strong> across 11 top-level sections ·
-              <strong>943 pages sampled</strong> · tiered coverage: 100% &lt;100 pages · 50% 100–200 pages · 25% &gt;200 pages · HTML component analysis via automated fetch · <strong>18 templates, all high confidence</strong> ·
+              <strong>943 pages sampled</strong> · tiered coverage: 100% &lt;100 pages · 50% 100–200 pages · 25% &gt;200 pages · HTML component analysis via automated fetch · <strong>18 templates, all high confidence</strong> · <strong>18 representative pages imported</strong> via page-import workflow ·
       AEM CMS on current platform → AEM Edge Delivery Services (EDS)
     </div>
   </div>
@@ -772,7 +779,7 @@
     </div>
     <div class="metric-card" style="--gradient: linear-gradient(90deg, var(--az-green), #00e8a2)">
       <div class="metric-label">Blocks Required</div>
-      <div class="metric-value" style="color: var(--az-green)">32</div>
+      <div class="metric-value" style="color: var(--az-green)">33</div>
       <div class="metric-sub">EDS block components</div>
     </div>
     <div class="metric-card" style="--gradient: linear-gradient(90deg, var(--az-amber), #ffd166)">
@@ -1348,7 +1355,7 @@
 
   <div class="section-header">
     <h2 class="section-title">EDS Block Inventory</h2>
-    <span class="section-meta">32 blocks required across all 18 templates · identified via automated HTML component analysis across 943 sampled pages</span>
+    <span class="section-meta">33 blocks required across all 18 templates · validated via page-import workflow on 18 representative pages + automated HTML component analysis across 943 sampled pages</span>
   </div>
 
   <div class="blocks-grid" id="blocks-grid"></div>
@@ -1450,14 +1457,14 @@
     <div class="effort-sidebar">
       <div class="summary-card">
         <div class="summary-card-title">Effort Summary (Scenario C)</div>
-        <div class="summary-row"><span class="summary-row-label">Block development (32 blocks)</span><span class="summary-row-value">75 pts</span></div>
+        <div class="summary-row"><span class="summary-row-label">Block development (33 blocks)</span><span class="summary-row-value">76 pts</span></div>
         <div class="summary-row"><span class="summary-row-label">Template builds (18 templates)</span><span class="summary-row-value">40 pts</span></div>
         <div class="summary-row"><span class="summary-row-label">Content migration (import scripts)</span><span class="summary-row-value">20 pts</span></div>
         <div class="summary-row"><span class="summary-row-label">Global styles + header/footer</span><span class="summary-row-value">12 pts</span></div>
         <div class="summary-row"><span class="summary-row-label">Performance + accessibility QA</span><span class="summary-row-value">10 pts</span></div>
         <div class="summary-row"><span class="summary-row-label">Country sites strategy + setup</span><span class="summary-row-value">15 pts</span></div>
         <div class="summary-row"><span class="summary-row-label">Integrations (Veeva, analytics)</span><span class="summary-row-value">10 pts</span></div>
-        <div class="summary-row"><span class="summary-row-label" style="color:var(--az-text)">Total (Scenario C)</span><span class="summary-row-value" style="color:var(--az-green)">187 pts</span></div>
+        <div class="summary-row"><span class="summary-row-label" style="color:var(--az-text)">Total (Scenario C)</span><span class="summary-row-value" style="color:var(--az-green)">188 pts</span></div>
       </div>
 
       <div class="summary-card">
@@ -1668,9 +1675,9 @@
   // ── BLOCKS DATA ──
   const blocks = [
     /* ── HERO GROUP (3 distinct variants) ── */
-    { icon: '🖼️', name: 'hero-feature', usage: 'Press, Medical, Articles, WSCD, Country PRs', reuse: 73, detail: 'Full-bleed image hero with date-meta, tags, title. Site CSS class: heroFeature / hero-feature. Present on 99% of press releases and 88–96% of articles/WSCD. Distinct from hero-header: embeds date + taxonomy always.', url: 'https://www.astrazeneca.com/media-centre/press-releases/2026/full-year-q4-2025-results.html', screenshot: 'screenshots/block-hero.png' },
+    { icon: '🖼️', name: 'hero-feature', usage: 'Press Release (2 templates)', reuse: 11, detail: 'Full-bleed image hero with date-meta, tags, title. CSS: heroFeature / hero-feature. Page-import confirmed: H1 + date row + tags row. Present on Press Release and Editorial Article templates. Absent from Medical Release (which uses rich-header). Distinct from hero-header: always embeds date + taxonomy.', url: 'https://www.astrazeneca.com/media-centre/press-releases/2025/imfinzi-based-regimen-reduced-the-risk-of-death-by-22-percent-in-early-gastric-cancer-vs-chemotherapy-alone-in-matterhorn-phase-iii-trial.html', screenshot: 'screenshots/block-hero.png' },
     { icon: '🏠', name: 'hero-header', usage: 'Suppliers (85%), Media hub (62%), General pages', reuse: 45, detail: 'Section landing page hero without date/tags. Multiple colour variants confirmed: mulberry, purple, graphite, light-blue. CSS: hero-header--{variant}. Used on supplier and media-centre listing pages primarily.', url: 'https://www.astrazeneca.com/media-centre/press-releases.html', screenshot: 'screenshots/block-hero-text.png' },
-    { icon: '📌', name: 'rich-header', usage: '12 of 18 templates (Therapy 97%, R&D 91%, Sustain 93%, Country Hub 78%)', reuse: 82, detail: 'Compact interior page header with strapline and optional icon. CSS: rich-header / rich-header__strapline / rich-header__icon-strapline. Used on all hub/deep pages. Confirmed absent on press/medical releases.', url: 'https://www.astrazeneca.com/our-therapy-areas/oncology.html', screenshot: 'screenshots/block-hero.png' },
+    { icon: '📌', name: 'rich-header', usage: '13 of 18 templates (72%)', reuse: 72, detail: 'Compact interior page header with optional strapline and icon. CSS: rich-header / rich-header__strapline / rich-header__icon-strapline. Page-import confirmed on: Medical Release, WSCD Topic, R&D Deep, Therapy Hub, Investor Relations, Sustainability, Country Hub, Partnering, AZ Suppliers, Homepage, Section Hub, Navigation Hub, Form/Contact. The most important block to build correctly — nearly every non-press template uses it.', url: 'https://www.astrazeneca.com/our-therapy-areas/oncology.html', screenshot: 'screenshots/block-hero.png' },
     /* ── UNIVERSAL ── */
     { icon: '📝', name: 'rich-text', usage: 'All 18 templates (100%)', reuse: 100, detail: 'General editorial body copy. CSS: rich-text. Present on every single sampled page. Universal block.', url: 'https://www.astrazeneca.com/media-centre/articles/pioneering-new-possibilities-for-the-rare-disease-community.html', screenshot: 'screenshots/block-rich-text.png' },
     { icon: '🗓️', name: 'date-meta', usage: 'Press (99%), Medical (100%), Articles (88%), WSCD (96%)', reuse: 52, detail: 'Published date with region label. CSS: date / date__date / date__date-region / publishedDate. Appears on all time-stamped content. Not present on hub/landing pages.', url: 'https://www.astrazeneca.com/media-centre/press-releases/2026/full-year-q4-2025-results.html', screenshot: 'screenshots/block-hero-text.png' },
@@ -1681,11 +1688,11 @@
     { icon: '🎬', name: 'video-embed', usage: '12 of 15 sections (Investor 64%, Therapy 53%, R&D 49%)', reuse: 85, detail: 'Embedded video player. CSS: video-module / video-template. Confirmed in 12 out of 14 sections sampled. Most prevalent on investor-relations and therapy hub pages.', url: 'https://www.astrazeneca.com/r-d/next-generation-therapeutics/cell-therapies.html', screenshot: 'screenshots/block-video-embed.png' },
     { icon: '💬', name: 'quote', usage: 'Company (85%), R&D (66%), Therapy (41%), Sustain (20%)', reuse: 51, detail: 'Pull quote with attribution. CSS: quote / quote--with-marks / quote__author / quote__footer. Confirmed in 6 sections. Most prevalent on people profiles (85%) and R&D pages (66%).', url: 'https://www.astrazeneca.com/media-centre/articles/pioneering-new-possibilities-for-the-rare-disease-community.html', screenshot: 'screenshots/block-quote-cta.png' },
     { icon: '📅', name: 'timeline', usage: 'Company/People profiles (78%)', reuse: 10, detail: 'Chronological career/event timeline. CSS: timeline / timelineItems / timeline__item. Confirmed on 78% of people profile pages. Appears only in the company section.', url: 'https://www.astrazeneca.com/our-company/our-people/cristina-duran.html', screenshot: 'screenshots/block-timeline.png' },
-    { icon: '📂', name: 'accordion', usage: '10 of 15 sections (Company 56%, Partnering 42%)', reuse: 75, detail: 'Collapsible content sections. CSS: accordion__content / accordion__header / ui-accordion-tagging. Confirmed in 10 sections. Most prevalent on company profile and partnering pages.', url: 'https://www.astrazeneca.com/r-d/next-generation-therapeutics/cell-therapies.html', screenshot: 'screenshots/block-accordion.png' },
+    { icon: '📂', name: 'accordion', usage: '5 of 18 templates (28%)', reuse: 28, detail: 'Collapsible content sections. CSS: accordion__content / accordion__header / ui-accordion-tagging. Page-import confirmed on: People Profile, Therapy Hub, Partnering, AZ Suppliers, Legal/T&Cs. Legal/T&Cs has 75 H3s all wrapped in accordion — making accordion critical for that template.', url: 'https://www.astrazeneca.com/r-d/next-generation-therapeutics/cell-therapies.html', screenshot: 'screenshots/block-accordion.png' },
     { icon: '🃏', name: 'content-tile', usage: 'WSCD (93%), R&D (86%), Therapy (25%), Investor (7%)', reuse: 74, detail: 'Content navigation card grid. CSS: content-tile / content-tile--dn-style / content-tile__title. Confirmed in 10 sections. Defining element of WSCD (93%) and R&D (86%) templates.', url: 'https://www.astrazeneca.com/our-therapy-areas/oncology.html', screenshot: 'screenshots/block-cards-grid.png' },
-    { icon: '🧭', name: 'jump-nav', usage: 'Therapy (62%), R&D (37%), Investor (21%), Sustain (20%)', reuse: 60, detail: 'In-page anchor navigation bar. CSS: jump-to-anchor / jump-to / jump-to__list / jump-to__list-item. Confirmed in 9 sections. Two CSS variants found: jump-to-anchor (anchor targets) and jump-to (nav bar).', url: 'https://www.astrazeneca.com/r-d/next-generation-therapeutics/cell-therapies.html', screenshot: 'screenshots/block-jump-nav.png' },
+    { icon: '🧭', name: 'jump-nav', usage: '4 of 18 templates (22%)', reuse: 22, detail: 'In-page anchor navigation bar. CSS: jump-to-anchor / jump-to / jump-to__list / jump-to__list-item. Page-import confirmed on: R&D Deep, Therapy Hub, Investor Relations, Sustainability. Two CSS variants: jump-to-anchor (anchor targets placed at section headings) and jump-to (the nav bar itself).', url: 'https://www.astrazeneca.com/r-d/next-generation-therapeutics/cell-therapies.html', screenshot: 'screenshots/block-jump-nav.png' },
     { icon: '📣', name: 'text-cta', usage: 'R&D (66%), Sustain (3%), Therapy (3%), WSCD (7%)', reuse: 36, detail: 'Text block with call-to-action link. CSS: text-action-block / text-action-block--light-blue / text-action-block--magenta. Light-blue, magenta colour variants. Dominant in R&D section (66%).', url: 'https://www.astrazeneca.com/r-d/next-generation-therapeutics/cell-therapies.html', screenshot: 'screenshots/block-jump-nav.png' },
-    { icon: '🖼️', name: 'image-panel', usage: '9 of 15 sections (Partnering 42%, Therapy 34%)', reuse: 67, detail: 'Linked image card panel with slider. CSS: link-image-panel-v2 / variants: mulberry, gold, light-blue. Confirmed in 9 sections. Distinct from image-feature: these are card-sized linked tiles, not full-bleed overlays.', url: 'https://www.astrazeneca.com/our-therapy-areas/oncology.html', screenshot: 'screenshots/block-hero.png' },
+    { icon: '🖼️', name: 'image-panel', usage: '4 of 18 templates (22%)', reuse: 22, detail: 'Linked image card panel with slider. CSS: link-image-panel-v2 / variants: mulberry, gold, light-blue. Page-import confirmed on: Therapy Hub, Country Hub, Homepage, Section Hub. Distinct from image-feature: card-sized linked tiles in a slider/grid, not full-bleed overlays.', url: 'https://www.astrazeneca.com/our-therapy-areas/oncology.html', screenshot: 'screenshots/block-hero.png' },
     { icon: '🧩', name: 'split-feature', usage: 'Articles (59%), R&D (9%), Therapy (31%), WSCD (7%)', reuse: 64, detail: 'Split image+text feature tile. CSS: wscd-split-feature-tile. NOT the same as content-tile. Defining component of Editorial Articles (59%). Also present across R&D, therapy, partnering pages.', url: 'https://www.astrazeneca.com/media-centre/articles/pioneering-new-possibilities-for-the-rare-disease-community.html', screenshot: 'screenshots/block-related-articles.png' },
     { icon: '👤', name: 'author-bio', usage: 'Company (81%), WSCD (64%), Articles (29%), Investor (14%)', reuse: 52, detail: 'Author profile: circular image (img-circle), name, title, social links (social-title with LinkedIn). CSS: bio / img-circle / social-title. Confirmed in 8 sections. Integral to people profiles and thought leadership content.', url: 'https://www.astrazeneca.com/what-science-can-do/topics/next-generation-therapeutics/turning-natures-messengers-medicines-innovation-peptide-discovery-development.html', screenshot: 'screenshots/block-author-byline.png' },
     { icon: '✉️', name: 'email-signup', usage: 'WSCD (79%), Media hub (62%), R&D (11%), Investor (7%)', reuse: 39, detail: 'Newsletter/email signup form. CSS: email-signup / newsletter-sign-up / signup-content / cmp-form-recaptcha. reCAPTCHA integration confirmed. Dominant on WSCD pages (79%) and media-centre hub pages.', url: 'https://www.astrazeneca.com/what-science-can-do/topics/next-generation-therapeutics/turning-natures-messengers-medicines-innovation-peptide-discovery-development.html', screenshot: 'screenshots/block-email-signup.png' },
@@ -1694,7 +1701,7 @@
     { icon: '🔲', name: 'promo-grid', usage: 'Media hub (75%), Investor (14%), Sustain (3%)', reuse: 29, detail: 'Promotional tile grid. CSS: promo-tiles-v2 / promo-tiles-v2__grid. Dominant on media-centre listing/index pages (75%). Also on investor results pages and sustainability hub. Likely becomes an EDS query-index driven listing block.', url: 'https://www.astrazeneca.com/media-centre/press-releases.html', screenshot: 'screenshots/block-cards-grid.png' },
     { icon: '🔷', name: 'icon-links', usage: 'Country hub (6%), Therapy (28%), General (24%)', reuse: 36, detail: 'Icon + link navigation panel. CSS: icon-link-panel / icon-link-panel__image / icon-link-panel__link. Found in 5 sections. Used as a quick-link navigation grid on country hub and therapy area pages.', url: 'https://www.astrazeneca.com/country-sites/saudi-arabia.html', screenshot: 'screenshots/block-cards-grid.png' },
     { icon: '🏔️', name: 'image-feature', usage: 'Country (4%), Investor (7%), Media hub (50%), Therapy (19%)', reuse: 49, detail: 'Full-bleed image panel with text overlay. CSS: image-panel-feature / image-panel-feature--bg-center / image-panel-feature--left. Different from image-panel: full-width, overlaid text. Found in 7 sections.', url: 'https://www.astrazeneca.com/country-sites/near-east-and-maghreb.html', screenshot: 'screenshots/block-hero.png' },
-    { icon: '🎠', name: 'carousel', usage: 'R&D (11%), Therapy (22%), Company (4%), Sustain (10%)', reuse: 55, detail: 'Full-bleed image carousel/slider. CSS: carouselFullBleedImageSlide / carouselImageSlide. Found in 8 sections. Used on therapy hubs and R&D pages for visual storytelling. Separate from image-panel slider.', url: 'https://www.astrazeneca.com/our-therapy-areas/oncology.html', screenshot: 'screenshots/block-hero.png' },
+    { icon: '🎠', name: 'carousel', usage: '1 of 18 templates (Country Hub)', reuse: 6, detail: 'Full-bleed image carousel/slider. CSS: carouselFullBleedImageSlide / carouselImageSlide. Page-import confirmed on Country Hub (egypt.html) — used for partner logo/initiative carousel. Separate from image-panel slider (which is a grid, not rotating).', url: 'https://www.astrazeneca.com/country-sites/egypt.html', screenshot: 'screenshots/block-hero.png' },
     { icon: '📰', name: 'news-feed', usage: 'Therapy (22%), Sustain (17%), General (12%)', reuse: 26, detail: 'Latest news / trending stories feed. CSS: latest-news / trending-stories / treding-story-content. Confirmed in 3 sections. Dynamic content block driven by EDS query index in the migrated version.', url: 'https://www.astrazeneca.com/our-therapy-areas/oncology.html', screenshot: 'screenshots/block-news-feed.png' },
     { icon: '🔔', name: 'article-cta', usage: 'Sustainability (50%), Partnering (8%)', reuse: 17, detail: 'In-article call-to-action block. CSS: article-cta / article-cta-align. Found almost exclusively on sustainability pages (50%) where it links to reports and related initiatives. Signature block of sustainability template.', url: 'https://www.astrazeneca.com/sustainability/ethics-compliance.html', screenshot: 'screenshots/block-stats-callout.png' },
     { icon: '🔗', name: 'media-links', usage: 'Company (11%), Therapy (25%), Investor (7%)', reuse: 42, detail: 'Text + media link list. CSS: media-text-link / media-text-link-list / media-text-link-list-item. Found in 6 sections including therapy hubs and investor relations pages. Lightweight linked list with image thumbnails.', url: 'https://www.astrazeneca.com/our-therapy-areas/oncology.html', screenshot: 'screenshots/block-related-articles.png' },
@@ -1702,7 +1709,8 @@
     { icon: '📑', name: 'pdf-viewer', usage: 'Investor (36%), Partnering (8%), Therapy (3%)', reuse: 26, detail: 'Embedded PDF viewer. CSS: pdfviewer__wrapper / cmp-pdfviewer__button. Found in 4 sections. Used on investor-relations for inline annual reports and partnering pages for brochures.', url: 'https://www.astrazeneca.com/investor-relations/annual-reports.html', screenshot: 'screenshots/block-download-list.png' },
     { icon: '📋', name: 'event-list', usage: 'Investor (7%), Suppliers (5%), General (3%)', reuse: 20, detail: 'Event listing cards. CSS: event-card. Found in 3 sections. Used for results events, conferences. In EDS would be driven by a query-index events spreadsheet.', url: 'https://www.astrazeneca.com/investor-relations/results-and-presentations.html', screenshot: 'screenshots/block-cards-grid.png' },
     { icon: '📊', name: 'data-table', usage: 'Investor (14%), General (3%)', reuse: 12, detail: 'Structured data table. CSS: shareholder-information. Found in investor-relations section. Used for shareholder data, financial tables. Will need EDS spreadsheet/JSON integration.', url: 'https://www.astrazeneca.com/investor-relations/shareholder-information.html', screenshot: 'screenshots/block-download-list.png' },
-    { icon: '🌟', name: 'homepage-hero', usage: 'Homepage, Therapy (22%), Sustain (17%)', reuse: 22, detail: 'Distinct from other heroes. CSS: homepage-hero. Found on homepage and several therapy/sustain feature pages. Full-bleed, animated, high-impact hero variant. Separate EDS block from hero-feature and hero-header.', url: 'https://www.astrazeneca.com/', screenshot: 'screenshots/block-hero.png' },
+    { icon: '🌟', name: 'homepage-hero', usage: 'Homepage (1), Section Hub (2)', reuse: 17, detail: 'Distinct from other heroes. CSS: homepage-hero. Confirmed via page-import on / and /r-d.html. Full-bleed, animated, high-impact hero. Shared between homepage and the 2 major section hubs (/r-d, /our-company). Separate EDS block from hero-feature and hero-header.', url: 'https://www.astrazeneca.com/', screenshot: 'screenshots/block-hero.png' },
+    { icon: '🗺️', name: 'country-list', usage: 'AZ Suppliers (1 template)', reuse: 6, detail: 'Confirmed via page-import on /az-suppliers/az-coupa-supplier.html. CSS: country-list / country-list__flag / country-list__heading / country-list__link. Alphabetical list of country flags + links — used for the global supplier contact directory. Unique to Suppliers template.', url: 'https://www.astrazeneca.com/az-suppliers/az-coupa-supplier.html', screenshot: 'screenshots/block-download-list.png' },
   ];
 
   function toggleBlockExpand(name) {
@@ -1779,7 +1787,7 @@
 
   // ── EFFORT DATA ──
   const effortRows = [
-    ['Block Development', '32 unique blocks', 'high', '75 pts', 'Heaviest engineering work; 12 new blocks discovered via 25% sampling (carousel, image-feature, promo-grid, icon-links, article-cta, pdf-viewer, show-more, event-list, data-table, media-links, news-feed, homepage-hero)'],
+    ['Block Development', '33 unique blocks', 'high', '76 pts', 'Validated via page-import on all 18 representative pages. country-list confirmed as additional block (AZ Suppliers). rich-header (72%), image-feature (28%), jump-nav (22%) are the highest-reuse blocks after rich-text. Complexity tiers: simple (rich-text, date-meta, tags, footnote, legal), medium (accordion, jump-nav, stats, quote, timeline, show-more, icon-links), complex (hero-feature, rich-header, image-feature, content-tile, carousel, promo-grid, news-feed, form-recaptcha, homepage-hero).'],
     ['Template Builds', '18 templates', 'high', '40 pts', 'Wire up blocks into page templates; content models per template. Templates span: press/medical releases, editorial articles, WSCD topics, people profiles, therapy hubs, R&amp;D deep content, investor relations, sustainability, country hubs, partnering, suppliers, media hub, homepage, section hubs, navigation hubs, forms, legal pages.'],
     ['Content Import Scripts', 'Press releases + people profiles', 'medium', '20 pts', 'Node.js scripts to batch-import from current CMS'],
     ['Global Styles + Typography', 'styles.css, fonts.css, lazy-styles.css', 'medium', '12 pts', 'Design system tokens, brand fonts, responsive grid'],
